@@ -578,22 +578,6 @@ require('lazy').setup({
         -- tsserver = {},
         --
 
-        fsautocomplete = {
-          settings = {
-            FSharp = {
-              enableAnalyzers = true,
-              smartIndent = true,
-              unnecessaryParenthesesAnalyzer = true,
-              verboseLogging = true,
-              Linter = true,
-              UnusedOpensAnalyzer = true,
-              UnusedDeclarationsAnalyzer = true,
-              SimplifyNameAnalyzer = true,
-              EnableReferenceCodeLens = true,
-            },
-          },
-        },
-
         lua_ls = {
           -- cmd = {...},
           -- filetypes = { ...},
@@ -639,6 +623,11 @@ require('lazy').setup({
         },
       }
     end,
+  },
+
+  {
+    'ionide/Ionide-vim',
+    ft = 'fsharp',
   },
 
   { -- Autoformat
