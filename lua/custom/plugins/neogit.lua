@@ -6,5 +6,8 @@ return {
 
     'nvim-telescope/telescope.nvim', -- optional
   },
-  config = true,
+  config = function()
+    require('neogit').setup {}
+    vim.keymap.set('n', '<leader>gs', '<cmd>Neogit<CR>', { desc = '[G]it [S]tatus' })
+  end,
 }
