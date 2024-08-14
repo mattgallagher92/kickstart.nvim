@@ -1,10 +1,10 @@
 return {
   'NeogitOrg/neogit',
   dependencies = {
-    'nvim-lua/plenary.nvim', -- required
-    'sindrets/diffview.nvim', -- optional - Diff integration
+    'nvim-lua/plenary.nvim',
+    { 'sindrets/diffview.nvim', opts = { view = { merge_tool = { layout = 'diff4_mixed' } } } },
 
-    'nvim-telescope/telescope.nvim', -- optional
+    'nvim-telescope/telescope.nvim',
   },
   config = function()
     require('neogit').setup {}
