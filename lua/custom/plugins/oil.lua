@@ -4,6 +4,7 @@ return {
     require('oil').setup {
       skip_confirm_for_simple_edits = true,
       use_default_keymaps = false,
+      watch_for_changes = true,
       keymaps = {
         ['g?'] = 'actions.show_help',
         ['<CR>'] = 'actions.select',
