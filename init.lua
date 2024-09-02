@@ -257,6 +257,9 @@ require('lazy').setup({
 
       -- [[ Configure Telescope ]]
       -- See `:help telescope` and `:help telescope.setup()`
+
+      -- TODO: tidy up: does it make sense to have this here? init.lua has no knowledge of trouble.
+      local open_with_trouble = require('trouble.sources.telescope').open
       require('telescope').setup {
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
@@ -266,6 +269,12 @@ require('lazy').setup({
         --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
         --   },
         -- },
+        defaults = {
+          mappings = {
+            i = { ['<c-t>'] = open_with_trouble },
+            n = { ['<c-t>'] = open_with_trouble },
+          },
+        },
         -- pickers = {}
         extensions = {
           ['ui-select'] = {
