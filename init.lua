@@ -814,6 +814,7 @@ require('lazy').setup({
         install_info = {
           url = 'https://github.com/ionide/tree-sitter-fsharp',
           branch = 'main',
+          revision = 'f54ac4e66843b5af4887b586888e01086646b515',
           files = { 'src/scanner.c', 'src/parser.c' },
         },
         requires_generate_from_grammar = false,
