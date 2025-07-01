@@ -200,7 +200,8 @@ require('lazy').setup({
         { '<leader>w', group = '[W]orkspace' },
         { '<leader>t', group = '[T]oggle' },
         { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
-        -- TODO: would like to include in obsidian config, but doesn't seem to work.
+        -- TODO: would like to include in package-specific config, but doesn't seem to work.
+        { '<leader>g', group = '[G]it' },
         { '<leader>o', group = '[O]bsidian' },
       }
     end,
