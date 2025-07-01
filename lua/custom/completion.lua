@@ -1,8 +1,14 @@
-local cmp = require 'cmp'
+local completion = {}
 
-cmp.setup.filetype({ 'sql' }, {
-  sources = {
-    { name = 'vim-dadbod-completion' },
-    { name = 'buffer' },
-  },
-})
+function completion.setUpCustomCompletions()
+  local cmp = require 'cmp'
+
+  cmp.setup.filetype({ 'sql' }, {
+    sources = {
+      { name = 'vim-dadbod-completion' },
+      { name = 'buffer' },
+    },
+  })
+end
+
+return completion

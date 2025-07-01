@@ -872,7 +872,8 @@ require('lazy').setup({
   },
 })
 
-require 'custom.completion'
+local c = require 'custom.completion'
+c.setUpCustomCompletions()
 
 local f = require 'custom.functions'
 f.applyCustomKeymaps()
