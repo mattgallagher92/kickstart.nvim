@@ -25,7 +25,15 @@ return {
     { '<leader>oc', vim.cmd.ObsidianCheck, desc = '[O]bsidian [C]heck' },
     { '<leader>od', vim.cmd.ObsidianDailies, desc = '[O]bsidian [D]ailies' },
     -- { '<leader>od', vim.cmd.ObsidianDebug, desc = '[O]bsidian [D]ebug' },
-    { '<leader>oe', vim.cmd.ObsidianExtractNote, desc = '[O]bsidian [E]xtractNote' },
+    {
+      '<leader>oe',
+      function()
+        local title = vim.fn.input 'New note title: '
+        vim.cmd.ObsidianExtractNote(title)
+      end,
+      mode = 'v',
+      desc = '[O]bsidian [E]xtractNote',
+    },
     { '<leader>of', vim.cmd.ObsidianFollowLink, desc = '[O]bsidian [F]ollowLink' },
     { '<leader>ol', vim.cmd.ObsidianLink, desc = '[O]bsidian [L]ink' },
     -- { '<leader>ol', vim.cmd.ObsidianLinkNew, desc = '[O]bsidian [L]inkNew' },
