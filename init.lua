@@ -872,5 +872,12 @@ c.setUpCustomCompletions()
 local f = require 'custom.functions'
 f.applyCustomKeymaps()
 
+vim.diagnostic.config { virtual_lines = false, severity_sort = true }
+
+vim.keymap.set('n', '<leader>td', function()
+  local new_config = not vim.diagnostic.config().virtual_lines
+  vim.diagnostic.config { virtual_lines = new_config }
+end, { desc = 'Toggle diagnostic virtual_lines' })
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
