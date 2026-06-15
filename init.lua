@@ -130,6 +130,37 @@ if not vim.uv.fs_stat(lazypath) then
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
+-- Detect system theme synchronously and set background immediately, to prevent UI flicker if theme changes.
+-- TODO: add keymap.
+local function get_system_appearance()
+  local handle = io.popen 'gsettings get org.gnome.desktop.interface color-scheme 2>/dev/null'
+  if handle then
+    local result = handle:read '*a'
+    handle:close()
+    -- GNOME returns 'prefer-dark' for dark mode, 'default' for light mode
+    return result:match 'dark' and 'dark' or 'light'
+  end
+  return 'light' -- fallback if command fails
+end
+vim.opt.background = get_system_appearance()
+
+-- TODO: consider caching, e.g.
+-- -- Early in config - read cached value instantly
+-- local cache_file = vim.fn.stdpath('cache') .. '/theme_mode'
+-- local cached = vim.fn.filereadable(cache_file) == 1
+--                 and vim.fn.readfile(cache_file)[1] or 'light'
+-- vim.opt.background = cached
+--
+-- -- Later - detect and update cache asynchronously
+-- vim.schedule(function()
+--   -- Your system detection code here
+--   local detected = detect_system_theme()  -- your function
+--   if detected ~= cached then
+--     vim.opt.background = detected
+--     vim.fn.writefile({detected}, cache_file)
+--   end
+-- end)
+
 -- [[ Configure and install plugins ]]
 --
 --  To check the current status of your plugins, run
@@ -201,6 +232,7 @@ require('lazy').setup({
         { '<leader>t', group = '[T]oggle' },
         { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
         -- TODO: would like to include in package-specific config, but doesn't seem to work.
+        -- NOTE: I think it doesn't work because of lazy loading. using a different event (like VimEnter) could help.
         { '<leader>g', group = '[G]it' },
         { '<leader>o', group = '[O]bsidian' },
       }
@@ -811,8 +843,8 @@ require('lazy').setup({
         install_info = {
           url = 'https://github.com/ionide/tree-sitter-fsharp',
           branch = 'main',
-          revision = 'f54ac4e66843b5af4887b586888e01086646b515',
           files = { 'src/scanner.c', 'src/parser.c' },
+          location = 'fsharp',
         },
         requires_generate_from_grammar = false,
         filetype = 'fsharp',
@@ -874,6 +906,7 @@ f.applyCustomKeymaps()
 
 vim.diagnostic.config { virtual_lines = false, severity_sort = true }
 
+-- TODO: would be cool to add keymap specifically for next error, to skip past all the warning recommendations etc.
 vim.keymap.set('n', '<leader>td', function()
   local new_config = not vim.diagnostic.config().virtual_lines
   vim.diagnostic.config { virtual_lines = new_config }

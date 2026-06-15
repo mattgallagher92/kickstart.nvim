@@ -8,9 +8,10 @@ function functions.centreBuffer()
   vim.cmd 'execute "vertical resize " . side_split_width'
   vim.cmd 'enew'
   vim.cmd 'wincmd w'
+  vim.cmd 'wincmd w'
   vim.cmd 'execute "vertical resize " . side_split_width'
   vim.cmd 'enew'
-  vim.cmd 'wincmd w'
+  vim.cmd 'wincmd W'
 end
 
 function functions.applyCustomKeymaps()
