@@ -1,5 +1,9 @@
 # kickstart.nvim
 
+>[!NOTE]
+>This configuration has been superseded by the
+>[nvim config in my dotfiles](https://github.com/mattgallagher92/dotfiles/tree/main/nvim/.config/nvim)
+
 ## Introduction
 
 A starting point for Neovim that is:
